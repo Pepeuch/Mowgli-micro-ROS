@@ -191,9 +191,9 @@ extern "C"
 
 /* Play button - (LOW when pressed) */
 #if BOARD_YARDFORCE500_VARIANT_B
-    #define PLAY_BUTTON_PIN GPIO_PIN_9
+#define PLAY_BUTTON_PIN GPIO_PIN_9
 #else
-    #define PLAY_BUTTON_PIN GPIO_PIN_7
+#define PLAY_BUTTON_PIN GPIO_PIN_7
 #endif
 #define PLAY_BUTTON_PORT GPIOC
 #define PLAY_BUTTON_GPIO_CLK_ENABLE() __HAL_RCC_GPIOC_CLK_ENABLE()
