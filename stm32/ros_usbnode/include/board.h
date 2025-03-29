@@ -179,8 +179,10 @@ extern uint8_t EMERGENCY_DEBUG;// Enable Emergency debugging
 /* Play button - (LOW when pressed) */
 #ifdef BOARD_YARDFORCE500_VARIANT_B
         #define PLAY_BUTTON_PIN GPIO_PIN_9
-#else
+#elif BOARD_YARDFORCE500_VARIANT_ORIG
         #define PLAY_BUTTON_PIN GPIO_PIN_7
+#else
+    #error "Microcontrôleur non supporté : veuillez définir STM32F401 ou STM32F103"
 #endif
 #define PLAY_BUTTON_PORT GPIOC
 #define PLAY_BUTTON_GPIO_CLK_ENABLE() __HAL_RCC_GPIOC_CLK_ENABLE()
