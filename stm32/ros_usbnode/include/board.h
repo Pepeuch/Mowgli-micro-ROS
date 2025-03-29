@@ -1,15 +1,15 @@
 #include <stdint.h>
-#pragma message "Defined macros:"
+#warning message "Defined macros:"
 #ifdef STM32F401
-    #pragma message "STM32F401 is defined"
+    #warning message "STM32F401 is defined"
 #else
-    #pragma message "STM32F401 is NOT defined"
+    #warning message "STM32F401 is NOT defined"
 #endif
 
 #ifdef STM32F103
-    #pragma message "STM32F103 is defined"
+    #warning message "STM32F103 is defined"
 #else
-    #pragma message "STM32F103 is NOT defined"
+    #warning message "STM32F103 is NOT defined"
 #endif
 #ifndef __BOARD_H
 #define __BOARD_H
