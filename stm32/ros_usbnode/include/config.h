@@ -1,0 +1,66 @@
+#pragma once
+#include <stdint.h>  // Pour uint8_t, uint32_t
+#include <stdbool.h> // Si besoin plus tard
+
+// --- Plages de sécurité ---
+#define MIN_SAFE_MAX_CHARGE_CURRENT 0.5f
+#define MAX_SAFE_MAX_CHARGE_CURRENT 1.5f
+#define MIN_SAFE_MIN_CHARGE_CURRENT 0.05f
+#define MAX_SAFE_MIN_CHARGE_CURRENT 0.15f
+#define MIN_SAFE_LIMIT_VOLTAGE_150MA 27.50f
+#define MAX_SAFE_LIMIT_VOLTAGE_150MA 29.35f
+#define MIN_SAFE_MAX_CHARGE_VOLTAGE 27.50f
+#define MAX_SAFE_MAX_CHARGE_VOLTAGE 29.40f
+#define MIN_SAFE_BAT_CHARGE_CUTOFF_VOLTAGE 27.50f
+#define MAX_SAFE_BAT_CHARGE_CUTOFF_VOLTAGE 29.4f
+#define MIN_SAFE_CHARGE_END_LIMIT_CURRENT 0.08f
+#define MAX_SAFE_CHARGE_END_LIMIT_CURRENT 0.15f
+#define MIN_SAFE_ONE_WHEEL_LIFT_EMERGENCY_MILLIS 1000
+#define MAX_SAFE_ONE_WHEEL_LIFT_EMERGENCY_MILLIS 20000
+#define MIN_SAFE_BOTH_WHEELS_LIFT_EMERGENCY_MILLIS 100
+#define MAX_SAFE_BOTH_WHEELS_LIFT_EMERGENCY_MILLIS 2000
+#define MIN_SAFE_TILT_EMERGENCY_MILLIS 50
+#define MAX_SAFE_TILT_EMERGENCY_MILLIS 1500
+#define MIN_SAFE_STOP_BUTTON_EMERGENCY_MILLIS 10
+#define MAX_SAFE_STOP_BUTTON_EMERGENCY_MILLIS 200
+#define MIN_SAFE_PLAY_BUTTON_CLEAR_EMERGENCY_MILLIS 500
+#define MAX_SAFE_PLAY_BUTTON_CLEAR_EMERGENCY_MILLIS 5000
+#define MIN_SAFE_MAX_MPS 0.1f
+#define MAX_SAFE_MAX_MPS 1.0f
+#define MIN_SAFE_PWM_PER_MPS 100.0f
+#define MAX_SAFE_PWM_PER_MPS 500.0f
+#define MIN_SAFE_TICKS_PER_M 100.0f
+#define MAX_SAFE_TICKS_PER_M 1000.0f
+#define MAX_SAFE_WHELL_BASE 1.000f
+#define MIN_SAFE_WHELL_BASE 0.100f
+// disableEmergency
+//#define DISABLE_EMERGENCY 0
+
+/* Variables dynamiques externes (définies dans config.c) */
+extern float MAX_CHARGE_CURRENT;
+extern float LIMIT_VOLTAGE_150MA;
+extern float MAX_CHARGE_VOLTAGE;
+extern float BAT_CHARGE_CUTOFF_VOLTAGE;
+extern float CHARGE_END_LIMIT_CURRENT;
+extern float MIN_CHARGE_CURRENT;
+extern float MAX_MPS;
+extern float PWM_PER_MPS;
+extern float TICKS_PER_M;
+extern float WHEEL_BASE;
+extern uint8_t I_DONT_NEED_MY_FINGERS;
+extern uint8_t OPTION_BUMPER;
+extern uint8_t OPTION_ULTRASONIC;
+extern uint8_t EMERGENCY_DEBUG;
+extern uint8_t IMU_ONBOARD_INCLINATION_THRESHOLD;
+extern uint32_t ONE_WHEEL_LIFT_EMERGENCY_MILLIS;
+extern uint32_t BOTH_WHEELS_LIFT_EMERGENCY_MILLIS;
+extern uint32_t TILT_EMERGENCY_MILLIS;
+extern uint32_t STOP_BUTTON_EMERGENCY_MILLIS;
+extern uint32_t PLAY_BUTTON_CLEAR_EMERGENCY_MILLIS;
+extern uint8_t DISABLE_EMERGENCY;
+
+/* Fonctions */
+void config_init_defaults(void);
+void config_set_value(const char* key, const char* value);
+bool flash_read_config(void);
+void flash_write_config(void);

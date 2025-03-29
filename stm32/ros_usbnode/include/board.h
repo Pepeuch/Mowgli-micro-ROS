@@ -1,8 +1,7 @@
-
+#include <stdint.h>
 
 #ifndef __BOARD_H
 #define __BOARD_H
-
 #ifdef __cplusplus
 extern "C"
 {
@@ -45,13 +44,12 @@ extern "C"
 #define BLADEMOTOR_LENGTH_RECEIVED_MSG 16
 #define DEBUG_TYPE DEBUG_TYPE_UART
 
-#define MAX_MPS 0.5		  // Allow maximum speed of 1.0 m/s
-#define PWM_PER_MPS 300.0 // PWM value of 300 means 1 m/s bot speed so we divide by 4 to have correct robot speed but still progressive speed
-#define TICKS_PER_M 300.0 // Motor Encoder ticks per meter
-#define WHEEL_BASE  0.325		// The distance between the center of the wheels in meters
-
-#define OPTION_ULTRASONIC 0
-#define OPTION_BUMPER 0
+extern float MAX_MPS;// 0.5		  // Allow maximum speed of 1.0 m/s
+extern float PWM_PER_MPS;// 300.0 // PWM value of 300 means 1 m/s bot speed so we divide by 4 to have correct robot speed but still progressive speed
+extern float TICKS_PER_M;// 300.0 // Motor Encoder ticks per meter
+extern float WHEEL_BASE;//  0.325		// The distance between the center of the wheels in meters
+extern uint8_t OPTION_ULTRASONIC;// 0
+extern uint8_t OPTION_BUMPER;// 0
 
 #define BOARD_HAS_MASTER_USART 1
 #elif BOARD_YARDFORCE500_VARIANT_B
@@ -67,13 +65,12 @@ extern "C"
 #define BLADEMOTOR_LENGTH_RECEIVED_MSG 16
 #define DEBUG_TYPE DEBUG_TYPE_SWO
 
-#define MAX_MPS 0.5		  // Allow maximum speed of 1.0 m/s
-#define PWM_PER_MPS 300.0 // PWM value of 300 means 1 m/s bot speed so we divide by 4 to have correct robot speed but still progressive speed
-#define TICKS_PER_M 300.0 // Motor Encoder ticks per meter
-#define WHEEL_BASE  0.325		// The distance between the center of the wheels in meters
-
-#define OPTION_ULTRASONIC 0
-#define OPTION_BUMPER 0
+extern float MAX_MPS;		  // Allow maximum speed of 1.0 m/s
+extern float PWM_PER_MPS; // PWM value of 300 means 1 m/s bot speed so we divide by 4 to have correct robot speed but still progressive speed
+extern float TICKS_PER_M; // Motor Encoder ticks per meter
+extern float WHEEL_BASE;// The distance between the center of the wheels in meters
+extern uint8_t OPTION_ULTRASONIC;
+extern uint8_t OPTION_BUMPER;
 #elif defined(BOARD_LUV1000RI) // TODO: This currently can't be selected via platformio
 #define VALID_BOARD_DEFINED 1
 #define PANEL_TYPE PANEL_TYPE_YARDFORCE_LUV1000RI
@@ -81,49 +78,39 @@ extern "C"
 
 #define DEBUG_TYPE 0
 
-#define OPTION_ULTRASONIC 1
-#define OPTION_BUMPER 0
+extern uint8_t OPTION_ULTRASONIC;
+extern uint8_t OPTION_BUMPER;
 
-#define MAX_MPS 0.5		  // Allow maximum speed of 1.0 m/s
-#define PWM_PER_MPS 300.0 // PWM value of 300 means 1 m/s bot speed so we divide by 4 to have correct robot speed but still progressive speed
-#define TICKS_PER_M 300.0 // Motor Encoder ticks per meter
-#define WHEEL_BASE 0.285   // The distance between the center of the wheels in meters
+extern float MAX_MPS;		  // Allow maximum speed of 1.0 m/s
+extern float PWM_PER_MPS; // PWM value of 300 means 1 m/s bot speed so we divide by 4 to have correct robot speed but still progressive speed
+extern float TICKS_PER_M; // Motor Encoder ticks per meter
+extern float WHEEL_BASE;  // The distance between the center of the wheels in meters
 
 #define BOARD_HAS_MASTER_USART 0
 #endif
 
-//#define I_DONT_NEED_MY_FINGERS              1      // disables EmergencyController() (no wheel lift, or tilt sensing and stopping the blade anymore)
+extern uint8_t I_DONT_NEED_MY_FINGERS; // disables EmergencyController() (no wheel lift, or tilt sensing and stopping the blade anymore)
+extern float MAX_CHARGE_CURRENT;/// nominal max charge current is 1.0 Amp
+extern float LIMIT_VOLTAGE_150MA;/// limite voltag when switching in 150mA mode
+extern float MAX_CHARGE_VOLTAGE;/// Max voltage allowed 29.4
+extern float BAT_CHARGE_CUTOFF_VOLTAGE;/// Max battery voltage allowed
+extern float CHARGE_END_LIMIT_CURRENT;/// We consider the battery is full when in CV mode the current below 0.1A
+#define MIN_DOCKED_VOLTAGE 20.0f// if voltage is greater than this assume we are docked
 
-/// nominal max charge current is 1.0 Amp
-#define MAX_CHARGE_CURRENT 1.0f
-/// limite voltag when switching in 150mA mode
-#define LIMIT_VOLTAGE_150MA 29.05f
-/// Max voltage allowed 29.4
-#define MAX_CHARGE_VOLTAGE 29.2f
-/// Max battery voltage allowed
-#define BAT_CHARGE_CUTOFF_VOLTAGE 29.15f
-/// We consider the battery is full when in CV mode the current below 0.1A
-#define CHARGE_END_LIMIT_CURRENT 0.08f
-// if voltage is greater than this assume we are docked
-#define MIN_DOCKED_VOLTAGE 20.0f
-// if voltage is lower this assume battery is disconnected
-#define MIN_BATTERY_VOLTAGE 5.0f
-
-// if current is greater than this assume the battery is charging
-#define MIN_CHARGE_CURRENT 0.1f
+#define MIN_BATTERY_VOLTAGE 22.0f// if voltage is lower this assume battery is disconnected
+extern float MIN_CHARGE_CURRENT;// if current is greater than this assume the battery is charging
+extern float MIN_CHARGE_CURRENT;// if current is greater than this assume the battery is charging
 #define LOW_BAT_THRESHOLD 25.2f /* near 20% SOC */
 #define LOW_CRI_THRESHOLD 22.0f /* near 0% SOC */
 
 // Emergency sensor timeouts
-#define ONE_WHEEL_LIFT_EMERGENCY_MILLIS 10000
-#define BOTH_WHEELS_LIFT_EMERGENCY_MILLIS 1000
-#define TILT_EMERGENCY_MILLIS 500 // used for both the mechanical and accelerometer based detection
-#define STOP_BUTTON_EMERGENCY_MILLIS 100
-#define PLAY_BUTTON_CLEAR_EMERGENCY_MILLIS 2000
-#define IMU_ONBOARD_INCLINATION_THRESHOLD 0x38 // stock firmware uses 0x2C (way more allowed inclination)
-
-// Enable Emergency debugging
-//#define EMERGENCY_DEBUG
+extern float ONE_WHEEL_LIFT_EMERGENCY_MILLIS;
+extern float BOTH_WHEELS_LIFT_EMERGENCY_MILLIS;
+extern float TILT_EMERGENCY_MILLIS; // used for both the mechanical and accelerometer based detection
+extern float STOP_BUTTON_EMERGENCY_MILLIS;
+extern float PLAY_BUTTON_CLEAR_EMERGENCY_MILLIS;
+extern float IMU_ONBOARD_INCLINATION_THRESHOLD;// stock firmware uses 0x2C (way more allowed inclination)
+extern uint8_t EMERGENCY_DEBUG;// Enable Emergency debugging
 
 // IMU configuration options
 #define EXTERNAL_IMU_ACCELERATION  1
